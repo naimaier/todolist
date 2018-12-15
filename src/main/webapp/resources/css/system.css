@@ -3,3 +3,33 @@ body {
 	background: #edf0f1;
 	font-family: 'Montserrat', sans-serif;
 }
+
+header {
+	height: 45px;
+	width: 100%;
+	background: #be2edd;
+	box-shadow: 0px 2px 4px rgba(44,62,80,0.15);
+	position: fixed;
+	padding: 15px;
+}
+
+header input {
+	height: 40px;
+	width: 98%;
+	/*float: left;*/
+	color: white;
+	text-indent: 15px;
+	font-size: 15px;
+	background: rgba(255,255,255,0.2);
+	border: 0;
+	border-radius: 3px;
+	outline: none;
+}
+
+header input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgba(255,255,255,0.75);
+  opacity: 1; /* Firefox */
+}
+header input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: rgba(255,255,255,0.75);
+}

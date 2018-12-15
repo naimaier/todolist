@@ -32,23 +32,32 @@ public class UserDao implements Users{
 		return null;
 	}
 
-	public boolean validate(User user) {
+	/**
+	 * Verify username and password and return a complete User object from the database (with id) if successful.
+	 * Returns null if the verification fails.
+	 */
+	public User validate(User validateUser) {
 		String sql = "select * from user where email=? and password=?";
-		boolean valid=false;
+		User user = null;
 		
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setString(1, user.getEmail());
-			stmt.setString(2, user.getPassword());
+			stmt.setString(1, validateUser.getEmail());
+			stmt.setString(2, validateUser.getPassword());
 			ResultSet resultSet = stmt.executeQuery();
-			valid = resultSet.next();
+			if(resultSet.next()) {
+				user = new User();
+				user.setId(resultSet.getLong("id"));
+				user.setEmail(resultSet.getString("email"));
+				user.setPassword(resultSet.getString("password"));
+			}
 			
 			resultSet.close();
 			stmt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		return valid;
+		return user;
 	}
 
 	public void create(User user) {

@@ -25,9 +25,16 @@ public class LoginController {
 		return "login-form";
 	}
 	
+	@RequestMapping("createAccountForm")
+	public String createAccountForm() {
+		//TODO return "create-account";
+		return null;
+	}
+	
 	@RequestMapping("login")
 	public String login(User user, HttpSession session) {
-		if (users.validate(user)) {
+		user = users.validate(user);
+		if (user != null) {
 			session.setAttribute("loggedUser", user);
 			return "list-tasks";
 		}
