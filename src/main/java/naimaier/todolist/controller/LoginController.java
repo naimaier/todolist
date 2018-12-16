@@ -36,7 +36,7 @@ public class LoginController {
 		user = users.validate(user);
 		if (user != null) {
 			session.setAttribute("loggedUser", user);
-			return "list-tasks";
+			return "redirect:tasks";
 		}
 		return "redirect:loginForm"; //chama o metodo que despacha para o jsp.
 	}

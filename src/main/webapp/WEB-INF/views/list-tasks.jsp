@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,17 @@
 </head>
 <body>
 	<header>
-		<input type="text" placeholder="Type task here"/>
+		<form action="addTask">
+			<input type="text" name="description" placeholder="Type task here"/>
+		</form>
 	</header>
+		
+	<section>
+		<ul>
+			<c:forEach items="${tasks}" var="task">
+				<li>${task.description}</li>
+			</c:forEach>
+		</ul>
+	</section>
 </body>
 </html>
