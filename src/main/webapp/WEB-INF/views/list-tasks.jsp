@@ -19,7 +19,7 @@
 	<section>
 		<ul>
 			<c:forEach items="${tasks}" var="task">
-				<li><input type="checkbox" id="finished_${task.id}" name="finished" ${task.finished ? 'checked' : ''}><label for="finished_${task.id}">${task.description}</label><i class="far fa-trash-alt"></i></li>
+				<li><input type="checkbox" id="finished_${task.id}" name="finished" ${task.finished ? 'checked' : ''}><label for="finished_${task.id}">${task.description}</label><a href="deleteTask?id=${task.id}"><i class="far fa-trash-alt"></i></a></li>
 			</c:forEach>
 		</ul>
 	</section>

@@ -40,9 +40,16 @@ public class ToDoController {
 		return "redirect:tasks";
 	}
 	
+	@RequestMapping("deleteTask")
+	public String deleteTask(Long id, HttpSession session) {
+		tasks.delete(tasks.byId(id));
+		return "redirect:tasks";
+	}
+	
 	public List<Task> listTasks(HttpSession session){
 		User user = (User) session.getAttribute("loggedUser");
 		
 		return tasks.byUser(user);
 	}
+	
 }

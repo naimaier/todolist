@@ -31,8 +31,25 @@ public class TaskDao implements Tasks{
 	}
 
 	public Task byId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from task where id=?";
+		Task task = null;
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setLong(1, id);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				task = new Task();
+				task.setId(rs.getLong("id"));
+				task.setDescription(rs.getString("description"));
+				task.setFinished(rs.getBoolean("finished"));
+				task.setUserId(rs.getLong("user"));
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return task;
 	}
 
 	public List<Task> byUser(User user) {
@@ -80,8 +97,16 @@ public class TaskDao implements Tasks{
 	}
 
 	public void delete(Task task) {
-		// TODO Auto-generated method stub
+		String sql = "delete from task where id=?";
 		
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setLong(1, task.getId());
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }
