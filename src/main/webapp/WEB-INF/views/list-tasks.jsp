@@ -19,9 +19,11 @@
 	<section>
 		<ul>
 			<c:forEach items="${tasks}" var="task">
-				<li><input type="checkbox" id="finished_${task.id}" name="finished" ${task.finished ? 'checked' : ''}><label for="finished_${task.id}">${task.description}</label><a href="deleteTask?id=${task.id}"><i class="far fa-trash-alt"></i></a></li>
+				<li><input type="checkbox" id="finished_${task.id}" name="finished" ${task.finished ? 'checked' : ''} onchange="toggleFinished(${task.id});"><label for="finished_${task.id}">${task.description}</label><a href="deleteTask?id=${task.id}"><i class="far fa-trash-alt"></i></a></li>
 			</c:forEach>
 		</ul>
 	</section>
+	<script type="text/javascript" src="resources/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="resources/js/system.js"></script>
 </body>
 </html>

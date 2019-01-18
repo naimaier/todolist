@@ -92,8 +92,19 @@ public class TaskDao implements Tasks{
 	}
 
 	public void update(Task task) {
-		// TODO Auto-generated method stub
-		
+		String sql = "update task set description=?, finished=?, user=? where id=? limit 1";
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setString(1, task.getDescription());
+			stmt.setBoolean(2, task.isFinished());
+			stmt.setLong(3, task.getUserId());
+			stmt.setLong(4, task.getId());
+			
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public void delete(Task task) {

@@ -41,9 +41,16 @@ public class ToDoController {
 	}
 	
 	@RequestMapping("deleteTask")
-	public String deleteTask(Long id, HttpSession session) {
+	public String deleteTask(Long id) {
 		tasks.delete(tasks.byId(id));
 		return "redirect:tasks";
+	}
+	
+	@RequestMapping("toggleFinished")
+	public void toggleFinished(Long id) {
+		Task task = tasks.byId(id);
+		task.setFinished(!task.isFinished());
+		tasks.update(task);
 	}
 	
 	public List<Task> listTasks(HttpSession session){
