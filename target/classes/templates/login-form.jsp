@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/css?family=Montserrat"	rel="stylesheet">
 <!-- <link rel="stylesheet" type="text/css" href="resources/css/reset.css"> -->
-<link rel="stylesheet" type="text/css" href="resources/css/login.css">
+<link rel="stylesheet" type="text/css" href="/css/login.css">
 <title>Login</title>
 </head>
 <body>

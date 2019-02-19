@@ -4,8 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/css?family=Montserrat"	rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="resources/css/reset.css">
-<link rel="stylesheet" type="text/css" href="resources/css/system.css">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/system.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 <title>Tasks</title>
 </head>
@@ -23,7 +23,7 @@
 			</c:forEach>
 		</ul>
 	</section>
-	<script type="text/javascript" src="resources/js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="resources/js/system.js"></script>
+	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="/js/system.js"></script>
 </body>
 </html>

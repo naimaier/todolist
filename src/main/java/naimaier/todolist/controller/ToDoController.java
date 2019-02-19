@@ -23,7 +23,7 @@ public class ToDoController {
 		super();
 		this.tasks = tasks;
 	}
-	
+
 	@RequestMapping("tasks")
 	public String tasks(Model model, HttpSession session) {
 		model.addAttribute("tasks", listTasks(session));
