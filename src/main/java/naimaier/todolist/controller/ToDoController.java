@@ -54,8 +54,9 @@ public class ToDoController {
 	}
 	
 	public List<Task> listTasks(HttpSession session){
-		User user = (User) session.getAttribute("loggedUser");
-		
+		//TODO User user = (User) session.getAttribute("loggedUser");
+		User user = new User();
+		user.setId(Long.valueOf(1));
 		return tasks.byUser(user);
 	}
 	

@@ -20,18 +20,13 @@ public class LoginController {
 		this.users = users;
 	}
 	
-	@RequestMapping("loginForm")
-	public String loginForm() {
-		return "login-form";
-	}
-	
 	@RequestMapping("createAccountForm")
 	public String createAccountForm() {
 		//TODO return "create-account";
 		return null;
 	}
 	
-	@RequestMapping("login")
+/*	@RequestMapping("login")
 	public String login(User user, HttpSession session) {
 		user = users.validate(user);
 		if (user != null) {
@@ -45,5 +40,5 @@ public class LoginController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:loginForm";
-	}
+	} */
 }
