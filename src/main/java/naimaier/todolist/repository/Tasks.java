@@ -9,7 +9,6 @@ public interface Tasks {
 	public Task byId(Long id);
 	public List<Task> byUser(User user);
 	
-	public void create(Task task);
-	public void update(Task task);
+	public void save(Task task);
 	public void delete(Task task);
 }

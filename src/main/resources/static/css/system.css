@@ -65,6 +65,13 @@ ul li input[type=checkbox]:checked + label{
 	text-decoration: line-through;
 }
 
-ul li i{
-	float: right;
+/* ul li i{ */
+/* 	float: right; */
+/* } */
+
+ul li button {
+	float:right;
+	border: none;
+	outline: none;
+	background: none;
 }

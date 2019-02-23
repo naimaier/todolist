@@ -10,14 +10,25 @@
 </head>
 <body>
 	<header>
-		<form action="addTask" method="POST">
+		<form th:action="@{/user/addTask}" method="POST">
 			<input type="text" name="description" placeholder="Type task here"/>
 		</form>
 	</header>
 		
 	<section>
 		<ul th:each="task : ${tasks}">
-			<li><input type="checkbox" id="finished_${task.id}" name="finished" ${task.finished ? 'checked' : ''} onchange="toggleFinished(${task.id});"><label for="finished_${task.id}" th:text="${task.description}"/><a href="deleteTask?id=${task.id}"><i class="far fa-trash-alt"></i></a></li>
+			<li>
+				<input type="checkbox" id="finished_${task.id}" name="finished" ${task.finished ? 'checked' : ''} th:onchange="toggleFinished(${task.id});">
+				<label for="finished_${task.id}" th:text="${task.description}"/>
+					<form th:action="@{/user/deleteTask}" method="POST">
+						<input type="hidden" name="id" value="${task.id}"/>
+						<button><i class="far fa-trash-alt"></i></button>
+					</form>
+				
+<!-- 				<a href="/user/deleteTask?id=${task.id}"> -->
+<!-- 					<i class="far fa-trash-alt"></i> -->
+<!-- 				</a> -->
+			</li>
 		</ul>
 	</section>
 	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>

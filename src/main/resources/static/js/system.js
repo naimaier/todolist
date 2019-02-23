@@ -1,7 +1,7 @@
 function toggleFinished(id){
 			$.ajax({
 				type:'POST',
-				url:"toggleFinished",
+				url:"/user/toggleFinished",
 				data: {'id' : id}
 			});
 		}

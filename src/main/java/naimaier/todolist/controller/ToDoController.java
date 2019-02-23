@@ -2,62 +2,66 @@ package naimaier.todolist.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import naimaier.todolist.dao.TaskDao;
+import naimaier.todolist.dao.UserDao;
 import naimaier.todolist.model.Task;
-import naimaier.todolist.model.User;
 import naimaier.todolist.repository.Tasks;
+import naimaier.todolist.repository.Users;
 
 @Controller
 public class ToDoController {
 	private final Tasks tasks;
+	private final Users users;
 
 	@Autowired
-	public ToDoController(TaskDao tasks) {
+	public ToDoController(TaskDao tasks, UserDao users) {
 		super();
 		this.tasks = tasks;
+		this.users = users;
 	}
 
-	@RequestMapping("tasks")
-	public String tasks(Model model, HttpSession session) {
-		model.addAttribute("tasks", listTasks(session));
-		return "list-tasks";
+	@GetMapping("/user/tasks")
+	public ModelAndView tasks() {
+		ModelAndView modelAndView = new ModelAndView("list-tasks");
+		modelAndView.addObject("tasks", listTasks());
+		return modelAndView;
 	}
 	
-	@RequestMapping("addTask")
-	public String addTask(Task task, HttpSession session) {
-		Long userId = ((User) session.getAttribute("loggedUser")).getId();
-		task.setUserId(userId);
+	@PostMapping("/user/addTask")
+	@Transactional
+	public String addTask(Task task) {
+		task.setUser(users.getActive());
 		
-		tasks.create(task);
+		tasks.save(task);
 		
-		return "redirect:tasks";
+		return "redirect:/user/tasks";
 	}
 	
-	@RequestMapping("deleteTask")
+	@PostMapping("/user/deleteTask")
+	@Transactional
 	public String deleteTask(Long id) {
 		tasks.delete(tasks.byId(id));
-		return "redirect:tasks";
+		return "redirect:/user/tasks";
 	}
 	
-	@RequestMapping("toggleFinished")
+	@PostMapping("/user/toggleFinished")
+	@Transactional
 	public void toggleFinished(Long id) {
 		Task task = tasks.byId(id);
 		task.setFinished(!task.isFinished());
-		tasks.update(task);
+		tasks.save(task);
 	}
 	
-	public List<Task> listTasks(HttpSession session){
-		//TODO User user = (User) session.getAttribute("loggedUser");
-		User user = new User();
-		user.setId(Long.valueOf(1));
-		return tasks.byUser(user);
+	public List<Task> listTasks(){
+		return tasks.byUser(users.getActive());
 	}
 	
 }

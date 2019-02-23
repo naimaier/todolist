@@ -1,10 +1,20 @@
 package naimaier.todolist.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Task {
+	@Id
+	@GeneratedValue
 	private Long id;
 	private String description;
 	private boolean finished;
-	private Long userId;
+	
+	@ManyToOne
+	private User user;
 	
 	public Long getId() {
 		return id;
@@ -24,10 +34,11 @@ public class Task {
 	public void setFinished(boolean finished) {
 		this.finished = finished;
 	}
-	public Long getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
+
 }
