@@ -39,6 +39,7 @@ public class ToDoController {
 	@Transactional
 	public String addTask(Task task) {
 		task.setUser(users.getActive());
+		task.setFinished(false);
 		
 		tasks.save(task);
 		
@@ -55,6 +56,7 @@ public class ToDoController {
 	@PostMapping("/user/toggleFinished")
 	@Transactional
 	public void toggleFinished(Long id) {
+		System.out.println("Controller " + id);
 		Task task = tasks.byId(id);
 		task.setFinished(!task.isFinished());
 		tasks.save(task);

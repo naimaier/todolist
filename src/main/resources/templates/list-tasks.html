@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 <link href="https://fonts.googleapis.com/css?family=Montserrat"	rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
 <link rel="stylesheet" type="text/css" href="/css/system.css">
@@ -18,20 +20,20 @@
 	<section>
 		<ul th:each="task : ${tasks}">
 			<li>
-				<input type="checkbox" id="finished_${task.id}" name="finished" ${task.finished ? 'checked' : ''} th:onchange="toggleFinished(${task.id});">
-				<label for="finished_${task.id}" th:text="${task.description}"/>
+				<input type="checkbox" th:id="finished_ + ${task.id}"
+					name="finished" th:checked="${task.finished}"
+					th:onchange="'javascript:toggleFinished(' + ${task.id} + ')'">
+					
+					<label th:for="finished_ + ${task.id}" th:text="${task.description}"/>
+					
 					<form th:action="@{/user/deleteTask}" method="POST">
-						<input type="hidden" name="id" value="${task.id}"/>
+						<input type="hidden" name="id" th:value="${task.id}"/>
 						<button><i class="far fa-trash-alt"></i></button>
 					</form>
-				
-<!-- 				<a href="/user/deleteTask?id=${task.id}"> -->
-<!-- 					<i class="far fa-trash-alt"></i> -->
-<!-- 				</a> -->
 			</li>
 		</ul>
 	</section>
-	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="/js/system.js"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/system.js}"></script>
 </body>
 </html>
