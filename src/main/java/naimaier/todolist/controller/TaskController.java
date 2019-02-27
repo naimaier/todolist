@@ -1,7 +1,5 @@
 package naimaier.todolist.controller;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,38 +8,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import naimaier.todolist.dao.TaskDao;
-import naimaier.todolist.dao.UserDao;
 import naimaier.todolist.model.Task;
-import naimaier.todolist.repository.Tasks;
-import naimaier.todolist.repository.Users;
+import naimaier.todolist.service.TaskService;
 
 @Controller
-public class ToDoController {
-	private final Tasks tasks;
-	private final Users users;
+public class TaskController {
 
 	@Autowired
-	public ToDoController(TaskDao tasks, UserDao users) {
-		super();
-		this.tasks = tasks;
-		this.users = users;
-	}
+	TaskService taskService;
 
 	@GetMapping("/user/tasks")
 	public ModelAndView tasks() {
 		ModelAndView modelAndView = new ModelAndView("list-tasks");
-		modelAndView.addObject("tasks", listTasks());
+		modelAndView.addObject("tasks", taskService.listTasks());
 		return modelAndView;
 	}
 	
 	@PostMapping("/user/addTask")
 	@Transactional
 	public String addTask(Task task) {
-		task.setUser(users.getActive());
-		task.setFinished(false);
-		
-		tasks.save(task);
+		taskService.addTask(task);
 		
 		return "redirect:/user/tasks";
 	}
@@ -49,21 +35,15 @@ public class ToDoController {
 	@PostMapping("/user/deleteTask")
 	@Transactional
 	public String deleteTask(Long id) {
-		tasks.delete(tasks.byId(id));
+		taskService.deleteTask(id);
+		
 		return "redirect:/user/tasks";
 	}
 	
 	@PostMapping("/user/toggleFinished")
 	@Transactional
 	public void toggleFinished(Long id) {
-		System.out.println("Controller " + id);
-		Task task = tasks.byId(id);
-		task.setFinished(!task.isFinished());
-		tasks.save(task);
-	}
-	
-	public List<Task> listTasks(){
-		return tasks.byUser(users.getActive());
+		taskService.toggleFinished(id);
 	}
 	
 }

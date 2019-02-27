@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Task {
+public class Task implements Comparable<Task> {
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -40,5 +40,16 @@ public class Task {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	@Override
+	public int compareTo(Task anotherTask) {
+		if (this.id < anotherTask.id) {
+			return -1;
+		}
+		if (this.id > anotherTask.id) {
+			return 1;
+		}
+		return 0;
+	}
+
 
 }
