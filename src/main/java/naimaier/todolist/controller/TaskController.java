@@ -26,10 +26,8 @@ public class TaskController {
 	
 	@PostMapping("/user/addTask")
 	@Transactional
-	public String addTask(Task task) {
+	public void addTask(Task task) {
 		taskService.addTask(task);
-		
-		return "redirect:/user/tasks";
 	}
 	
 	@PostMapping("/user/deleteTask")

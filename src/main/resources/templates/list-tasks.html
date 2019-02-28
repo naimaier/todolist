@@ -18,13 +18,14 @@
 	</header>
 		
 	<section>
-		<ul th:each="task : ${tasks}">
-			<li>
-				<input type="checkbox" th:id="finished_ + ${task.id}"
+		<!-- Uncompleted tasks -->
+		<ul id="unfinished">
+			<li th:each="task : ${tasks}" th:if="!${task.finished}">
+				<input type="checkbox" th:id="unfinished_ + ${task.id}"
 					name="finished" th:checked="${task.finished}"
 					th:onchange="'javascript:toggleFinished(' + ${task.id} + ')'">
-					
-					<label th:for="finished_ + ${task.id}" th:text="${task.description}"/>
+						
+					<label th:for="unfinished_ + ${task.id}" th:text="${task.description}"/>
 					
 					<form th:action="@{/user/deleteTask}" method="POST">
 						<input type="hidden" name="id" th:value="${task.id}"/>
@@ -32,7 +33,24 @@
 					</form>
 			</li>
 		</ul>
+
+		<!-- Completed tasks -->
+		<ul id="finished">
+			<li th:each="task : ${tasks}" th:if="${task.finished}">
+				<input type="checkbox" th:id="finished_ + ${task.id}"
+					name="finished" th:checked="${task.finished}"
+					th:onchange="'javascript:toggleFinished(' + ${task.id} + ')'">
+						
+					<label th:for="finished_ + ${task.id}" th:text="${task.description}"/>
+						
+					<form th:action="@{/user/deleteTask}" method="POST">
+						<input type="hidden" name="id" th:value="${task.id}"/>
+						<button><i class="far fa-trash-alt"></i></button>
+					</form>
+			</li>
+		</ul>
 	</section>
+	
 	<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/system.js}"></script>
 </body>

@@ -79,3 +79,7 @@ ul li button {
 ul li button i{
 	font-size: 16px;
 }
+
+ul#unfinished li:last-child{
+	margin-bottom: 25px;
+}
