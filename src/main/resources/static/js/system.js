@@ -15,6 +15,5 @@ function toggleFinished(id) {
 		},
 		headers : headers
 	});
-
 	location.reload();
 }
