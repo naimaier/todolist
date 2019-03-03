@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/css/system.css">
 <title>Bem vindo</title>
 </head>
 <body>
-<h1>Bem vindo</h1>
-<a href="/user/tasks">Entrar</a>
+<div th:insert="fragments/header :: header"></div>
+
+<div class="container-fluid text-center vertical-center">
+
+	<h1>Welcome to 'To Do List'</h1>
+	<h2>
+		<small class="text-muted">A study project using Java Spring Boot</small>
+	</h2>
+	<br/>
+	<form action="/login"> <!-- TODO soh se nao esta logado -->
+		<button class="btn btn-primary btn-lg">Sign In</button>
+	</form>
+	
+</div>
+
+<div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

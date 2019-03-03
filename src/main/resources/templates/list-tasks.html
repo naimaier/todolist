@@ -5,51 +5,51 @@
 <meta name="_csrf" th:content="${_csrf.token}"/>
 <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 <link href="https://fonts.googleapis.com/css?family=Montserrat"	rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/css/system.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 <title>Tasks</title>
 </head>
 <body>
-	<header>
-		<form th:action="@{/user/addTask}" method="POST">
-			<input type="text" name="description" placeholder="Type task here"/>
-		</form>
-	</header>
+	<div th:insert="fragments/header :: header"></div>
 		
 	<section>
+		<form id="add-task" th:action="@{/user/addTask}" method="POST">
+			<input type="text" name="description" placeholder="Type task here"/>
+		</form>
+		
 		<!-- Uncompleted tasks -->
-		<ul id="unfinished">
+		<ul class="tasks" id="unfinished">
 			<li th:each="task : ${tasks}" th:if="!${task.finished}">
 				<input type="checkbox" th:id="unfinished_ + ${task.id}"
 					name="finished" th:checked="${task.finished}"
 					th:onchange="'javascript:toggleFinished(' + ${task.id} + ')'">
-						
-					<label th:for="unfinished_ + ${task.id}" th:text="${task.description}"/>
-					
-					<form th:action="@{/user/deleteTask}" method="POST">
-						<input type="hidden" name="id" th:value="${task.id}"/>
-						<button><i class="far fa-trash-alt"></i></button>
-					</form>
+				<label th:for="unfinished_ + ${task.id}" th:text="${task.description}"/>
+				<form th:action="@{/user/deleteTask}" method="POST">
+					<input type="hidden" name="id" th:value="${task.id}"/>
+					<button><i class="far fa-trash-alt"></i></button>
+				</form>
 			</li>
 		</ul>
 
 		<!-- Completed tasks -->
-		<ul id="finished">
+		<ul class="tasks" id="finished">
 			<li th:each="task : ${tasks}" th:if="${task.finished}">
 				<input type="checkbox" th:id="finished_ + ${task.id}"
 					name="finished" th:checked="${task.finished}"
 					th:onchange="'javascript:toggleFinished(' + ${task.id} + ')'">
 						
-					<label th:for="finished_ + ${task.id}" th:text="${task.description}"/>
+				<label th:for="finished_ + ${task.id}" th:text="${task.description}"/>
 						
-					<form th:action="@{/user/deleteTask}" method="POST">
-						<input type="hidden" name="id" th:value="${task.id}"/>
-						<button><i class="far fa-trash-alt"></i></button>
-					</form>
+				<form th:action="@{/user/deleteTask}" method="POST">
+					<input type="hidden" name="id" th:value="${task.id}"/>
+					<button><i class="far fa-trash-alt"></i></button>
+				</form>
 			</li>
 		</ul>
 	</section>
+	
+	<div th:insert="fragments/footer :: footer"></div> 
 	
 	<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/system.js}"></script>

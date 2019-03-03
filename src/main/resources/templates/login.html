@@ -8,6 +8,7 @@
 <title>Login</title>
 </head>
 <body class="text-center">
+	
 	<div class="container">
 		<div th:if="${param.error}">
 			Invalid username and password
@@ -16,7 +17,6 @@
 			You have been logged out
 		</div>
 		<form class="form-signin" th:action="@{/login}" method="POST">
-<!-- 			<h2 class="h3 mb-3">Login</h2> -->
 			<div class="form-group">
 				<label for="username" class="sr-only">Email</label>
 				<input type="email" class="form-control" id="email" name="email" placeholder="Email" required autofocus>
@@ -29,5 +29,6 @@
 			<button type="submit" class="btn btn-lg btn-primary btn-block" style="margin-top:40px;">Login</button>
 		</form>
 	</div>
+	
 </body>
 </html>
