@@ -4,12 +4,15 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="https://getbootstrap.com/docs/4.3/examples/sign-in/signin.css">
+<link rel="stylesheet" type="text/css" href="/css/system.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 <title>Create Account</title>
 </head>
-<body class="text-center">
+<body>
 	
-	<div class="container">
+	<div th:insert="fragments/header :: header"></div>
+	
+	<div class="container vertical-center text-center">
 		<form class="form-signin" th:action="@{/createUser}" method="POST">
 			<h2 class="h3 mb-3">Create Account</h2>
 			<div class="form-group">
@@ -24,5 +27,6 @@
 		</form>
 	</div>
 	
+	<div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

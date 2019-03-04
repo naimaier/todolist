@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/css/system.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 <title>Bem vindo</title>
 </head>
 <body>
@@ -16,10 +18,12 @@
 		<small class="text-muted">A study project using Java Spring Boot</small>
 	</h2>
 	<br/>
-	<form action="/login"> <!-- TODO soh se nao esta logado -->
-		<button class="btn btn-primary btn-lg">Sign In</button>
-	</form>
-	
+	<div sec:authorize="isAnonymous()">
+		<form action="/user/tasks"> <!-- TODO soh se nao esta logado -->
+			<button class="btn btn-primary btn-lg">Sign In</button>
+		</form>
+	</div>
+
 </div>
 
 <div th:insert="fragments/footer :: footer"></div>
