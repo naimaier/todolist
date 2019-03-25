@@ -17,3 +17,7 @@ function toggleFinished(id) {
 	});
 	location.reload();
 }
+
+// Hides the tasks separator if there`s no corresponding tasks
+$("#unfinished").not(":has(li)").prev("#unfinished-tasks-separator").addClass( "d-none" );
+$("#finished").not(":has(li)").prev("#finished-tasks-separator").addClass( "d-none" );

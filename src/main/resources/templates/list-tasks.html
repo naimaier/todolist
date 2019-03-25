@@ -18,20 +18,28 @@
 			<input type="text" name="description" placeholder="Type task here"/>
 		</form>
 		
+		<div id="unfinished-tasks-separator">
+			<p>To do</p>
+		</div>
+		
 		<!-- Uncompleted tasks -->
 		<ul class="tasks" id="unfinished">
 			<li th:each="task : ${tasks}" th:if="!${task.finished}">
 				<input type="checkbox" th:id="unfinished_ + ${task.id}"
 					name="finished" th:checked="${task.finished}"
 					th:onchange="'javascript:toggleFinished(' + ${task.id} + ')'">
-				<label th:for="unfinished_ + ${task.id}" th:text="${task.description}"/>
+				<label th:for="unfinished_ + ${task.id}" th:text="${task.description}"></label>
 				<form th:action="@{/user/deleteTask}" method="POST">
 					<input type="hidden" name="id" th:value="${task.id}"/>
 					<button><i class="far fa-trash-alt"></i></button>
 				</form>
 			</li>
 		</ul>
-
+	
+		<div id="finished-tasks-separator">
+			<p>Completed Tasks</p>
+		</div>
+		
 		<!-- Completed tasks -->
 		<ul class="tasks" id="finished">
 			<li th:each="task : ${tasks}" th:if="${task.finished}">
@@ -39,7 +47,7 @@
 					name="finished" th:checked="${task.finished}"
 					th:onchange="'javascript:toggleFinished(' + ${task.id} + ')'">
 						
-				<label th:for="finished_ + ${task.id}" th:text="${task.description}"/>
+				<label th:for="finished_ + ${task.id}" th:text="${task.description}"></label>
 						
 				<form th:action="@{/user/deleteTask}" method="POST">
 					<input type="hidden" name="id" th:value="${task.id}"/>

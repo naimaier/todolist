@@ -48,19 +48,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers("/resources/**", "/static/**", "/css/**", "/js/**");
 	}
 
-	/*
-	@Bean
-	@Override
-	protected UserDetailsService userDetailsService() {
-		UserDetails user = User.withDefaultPasswordEncoder()
-			.username("kurt@kurt.com")
-			.password("kurt")
-			.roles("USER")
-			.build();
-		
-		return new InMemoryUserDetailsManager(user);
-	}*/
-	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
