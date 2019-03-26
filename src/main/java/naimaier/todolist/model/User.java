@@ -106,4 +106,19 @@ public class User implements UserDetails{
 		return true;
 	}
 	
+	public String getPrintRoles() {
+		String printRoles = "";
+		Boolean firstItem = true;
+		
+		for (Role role : roles) {
+			if (!firstItem) {
+				printRoles += ", ";
+			}
+			firstItem = false;
+			
+			printRoles += role.getName();
+		}
+		return printRoles;
+	}
+	
 }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat"	rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/css/system.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+<title>Users</title>
+</head>
+<body>
+	<div th:insert="fragments/header :: header"></div>
+	
+	<section>
+		<h2>Users</h2>
+		<table id="users-table" class="table">
+			<tr>
+				<th>User</th>
+				<th>Roles</th>
+				<th>Delete</th>
+			</tr>
+			<tr th:each="user : ${users}"  th:if="${user.id != loggedUser.id}">
+				<td><p th:text="${user.email}"/></td>
+				<td><p th:text="${user.printRoles}"></td>
+				<td>
+					<form th:action="@{/admin/deleteUser}" method="POST">
+						<input type="hidden" name="id" th:value="${user.id}"/>
+						<button class="clean"><i class="fas fa-times-circle" style="color: red;"></i></button>
+					</form>
+				</td>
+			</tr>
+		</table>
+		<hr/>
+		<h2>Create New</h2>
+		<form th:action="@{/createUser}" method="POST">
+			<input type="hidden" name="managing" value="true">
+			<table class="table">
+				<tr>
+					<td><input type="email" id="email" name="email" class="form-control" required></td>
+					<td><input type="password" id="password" name="password" class="form-control" required></td>
+					<td>
+						<div class="input-group">
+							<div class="input-group-prepend input-group-text">
+								<input type="checkbox" name="admin">
+							</div>
+							<label class="form-control">Admin</label>
+						</div>
+					</td>
+					<td><button class="btn btn-primary btn-block">ADD</button></td>
+				</tr>
+			</table>
+		</form>
+		<!-- 
+		<form action="#" style="width: 200px">
+			<input type="text" class="form-control" />
+			<input type="password" class="form-control" />
+			<br/>
+			<div class="input-group">
+				<div class="input-group-prepend input-group-text">
+					<input type="radio" name="role" checked />
+				</div>
+				<label class="form-control">User</label>
+			</div>
+			<div class="input-group">
+				<div class="input-group-prepend input-group-text">
+					<input type="radio" name="role" />
+				</div>
+				<label class="form-control">Admin</label>
+			</div>
+			<br/>
+			<button class="btn btn-primary btn-block">ADD</button>
+		</form>
+		 -->
+	</section>
+	
+	<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -1,6 +1,9 @@
 package naimaier.todolist.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,5 +49,17 @@ public class UserDao implements Users, UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return byName(username);
+	}
+
+	@Override
+	public List<User> listAll() {
+		try {
+			return manager
+					.createQuery("select u from User u", User.class)
+					.getResultList();
+			}
+		catch (NoResultException e) {
+			return null;
+		}
 	}
 }

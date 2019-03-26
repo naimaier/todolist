@@ -31,7 +31,7 @@
 				<label th:for="unfinished_ + ${task.id}" th:text="${task.description}"></label>
 				<form th:action="@{/user/deleteTask}" method="POST">
 					<input type="hidden" name="id" th:value="${task.id}"/>
-					<button><i class="far fa-trash-alt"></i></button>
+					<button class="clean"><i class="far fa-trash-alt"></i></button>
 				</form>
 			</li>
 		</ul>
@@ -51,7 +51,7 @@
 						
 				<form th:action="@{/user/deleteTask}" method="POST">
 					<input type="hidden" name="id" th:value="${task.id}"/>
-					<button><i class="far fa-trash-alt"></i></button>
+					<button class="clean"><i class="far fa-trash-alt"></i></button>
 				</form>
 			</li>
 		</ul>

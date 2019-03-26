@@ -2,6 +2,7 @@ package naimaier.todolist.service;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,6 +40,18 @@ public class UserService {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setRoles(new HashSet<Role>(Arrays.asList(roles.byName("USER"), roles.byName("ADMIN"))));
 		users.save(user);
+	}
+	
+	public void deleteUser(Long id) {
+		users.delete(users.byId(id));
+	}
+	
+	public List<User> listUsers() {
+		return users.listAll();
+	}
+	
+	public User getActive() {
+		return users.getActive();
 	}
 	
 }

@@ -112,7 +112,7 @@ ul.tasks li form {
 	float:right;
 }
 
-ul.tasks li button {
+button.clean {
 	border: none;
 	outline: none;
 	background: none;
