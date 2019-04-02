@@ -9,10 +9,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import naimaier.todolist.dao.RoleDao;
+import naimaier.todolist.dao.TaskDao;
 import naimaier.todolist.dao.UserDao;
 import naimaier.todolist.model.Role;
 import naimaier.todolist.model.User;
 import naimaier.todolist.repository.Roles;
+import naimaier.todolist.repository.Tasks;
 import naimaier.todolist.repository.Users;
 
 @Service
@@ -20,14 +22,16 @@ public class UserService {
 
 	private Users users;
 	private Roles roles;
+	private Tasks tasks;
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
 	@Autowired
-	public UserService(UserDao user, RoleDao roles) {
+	public UserService(UserDao user, RoleDao roles, TaskDao tasks) {
 		this.users = user;
 		this.roles = roles;
+		this.tasks = tasks;
 	}
 	
 	public void saveUser(User user) {
@@ -43,7 +47,10 @@ public class UserService {
 	}
 	
 	public void deleteUser(Long id) {
-		users.delete(users.byId(id));
+		User user = users.byId(id);
+		
+		tasks.deleteAllByUser(user);
+		users.delete(user);
 	}
 	
 	public List<User> listUsers() {

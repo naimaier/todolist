@@ -41,4 +41,12 @@ public class TaskDao implements Tasks{
 		manager.remove(task);
 	}
 
+	@Override
+	public void deleteAllByUser(User user) {
+		manager
+			.createQuery("delete from Task t where t.user = :user")
+			.setParameter("user", user)
+			.executeUpdate();
+	}
+
 }

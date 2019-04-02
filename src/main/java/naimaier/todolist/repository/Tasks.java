@@ -11,4 +11,5 @@ public interface Tasks {
 	
 	public void save(Task task);
 	public void delete(Task task);
+	public void deleteAllByUser(User user);
 }
