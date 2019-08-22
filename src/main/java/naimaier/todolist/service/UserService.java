@@ -36,12 +36,21 @@ public class UserService {
 	
 	public void saveUser(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		if (roles.byName("USER") == null) {
+			roles.save(new Role("USER"));
+		}
 		user.setRoles(new HashSet<Role>(Arrays.asList(roles.byName("USER"))));
 		users.save(user);
 	}
 	
 	public void saveAdmin(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		if (roles.byName("USER") == null) {
+			roles.save(new Role("USER"));
+		}
+		if (roles.byName("ADMIN") == null) {
+			roles.save(new Role("ADMIN"));
+		}
 		user.setRoles(new HashSet<Role>(Arrays.asList(roles.byName("USER"), roles.byName("ADMIN"))));
 		users.save(user);
 	}

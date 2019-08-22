@@ -16,4 +16,5 @@ spring.datasource.url=jdbc:mysql://localhost/todolist?createDatabaseIfNotExist=t
 spring.datasource.username= **INSERT USERNAME HERE**
 spring.datasource.password= **INSERT PASSWORD HERE**
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+spring.jpa.generate-ddl=true
 ```

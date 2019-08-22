@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import naimaier.todolist.model.User;
 import naimaier.todolist.service.UserService;
 
-public class Initialize {
+public class InsertAdminIntoDatabase {
 	@Autowired
 	UserService userService;
 
-	public Initialize() {
+	public InsertAdminIntoDatabase() {
 		
-		User user = new User("kurt@kurt.com", "kurt");
+		User user = new User("admin@admin.com", "admin");
 		userService.saveAdmin(user);
 	}
 	
